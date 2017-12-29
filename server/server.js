@@ -4,9 +4,9 @@ const socketIO=require('socket.io');
 const http=require('http');
 
 const publicPath=path.join(__dirname,'../public');
-const port=process.env.PORT || 3000;
+const port=process.env.PORT || 5000;
 var app=express();
-var server=app.listen(3000);
+var server=app.listen(port);
 var io=require('socket.io').listen(server);
 
 app.use(express.static(publicPath));

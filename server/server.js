@@ -22,8 +22,6 @@ io.on('connection',(socket) => {
       createdAt:new Date().getTime()
     });
   });
-
-
   socket.on('disconnect',()=> {
   console.log('User was disconnected');
   });

@@ -6,10 +6,9 @@ const http=require('http');
 const publicPath=path.join(__dirname,'../public');
 const port=process.env.PORT || 3000;
 var app=express();
-var server=http.createServer(app);  //this
-//var server=app.listen(3000);
-//var io=require('socket.io').listen(server);
-var io=socketIO(server);  //this
+var server=app.listen(3000);
+var io=require('socket.io').listen(server);
+
 app.use(express.static(publicPath));
 
 io.on('connection',(socket) => {
@@ -23,6 +22,8 @@ io.on('connection',(socket) => {
       createdAt:new Date().getTime()
     });
   });
+
+
   socket.on('disconnect',()=> {
   console.log('User was disconnected');
   });

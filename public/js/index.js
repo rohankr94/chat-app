@@ -1,12 +1,12 @@
 var socket = io();
-socket.on('connect',function() {
+socket.on('connect',=>() {
   console.log('Connected to server');
 });
 
-socket.on('disconnect',function() {
+socket.on('disconnect',=>() {
   console.log('Disonnected from the server');
 });
 
-socket.on('newMessage',function(message) {
+socket.on('newMessage',=>(message) {
   console.log('New message ', message);
 });

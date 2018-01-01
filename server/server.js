@@ -40,14 +40,21 @@ io.on('connection',(socket) => {
 
 
   socket.on('createMessage', (message,callback)=> {
-    console.log('createMessage',message);
-    io.emit('newMessage',messageGenerator(message.from,message.text));
+    // console.log('createMessage',message);
+    var user = users.getUser(socket.id);
+    if(user && isRealString(message.text)) {
+      io.to(user.room).emit('newMessage',messageGenerator(user.name,message.text));
+    }
+    //io.emit('newMessage',messageGenerator(message.from,message.text));
     callback();
   });
 
 
   socket.on('createLocationMessage',(coords) => {
-    io.emit('newLocationMessage',linkGenerator('admin',coords.latitude,coords.longitude));
+    var user = users.getUser(socket.id);
+    if(user){
+      io.to(user.room).emit('newLocationMessage',linkGenerator(user.name,coords.latitude,coords.longitude));
+    }
   });
 
   socket.on('disconnect',()=> {
